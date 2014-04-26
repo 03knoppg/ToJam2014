@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 178aff7259da510488adc62373b03393
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ExplodeEffectRef: {fileID: 100000, guid: 68270c58aad0dd9428a3371518e7ac73, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
