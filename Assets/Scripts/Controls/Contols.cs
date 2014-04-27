@@ -4,14 +4,14 @@ using System.Collections;
 public class Contols : MonoBehaviour {
 
 	Vector3 velocity;	//velocity of spaceship
-	float speed;
+	public float speed;
 
 
 	// Init space ship position and velocity
 	void Start () {
 		transform.localPosition = new Vector3 (0, 0, 0);
 		velocity = new Vector3 ( 0, 0, 0);
-		speed = 0.01f;
+		//speed = 0.01f;
 	}
 	
 	// Update is called once per frame
