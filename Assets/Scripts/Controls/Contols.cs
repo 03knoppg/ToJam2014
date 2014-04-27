@@ -94,10 +94,13 @@ public class Contols : MonoBehaviour {
 		//make ship point in movement direction
 		float smooth = 2.0F;
 		float tiltAngle = 30.0F;
-		
+
+		//get input axis
 		float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
 		float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
-		Quaternion target = Quaternion.Euler(-tiltAroundX, 0, -tiltAroundZ);
+
+		//move object based on movements
+		Quaternion target = Quaternion.Euler(-tiltAroundX, -tiltAroundZ+2, -tiltAroundZ);
 		transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smooth);
 	}
 
