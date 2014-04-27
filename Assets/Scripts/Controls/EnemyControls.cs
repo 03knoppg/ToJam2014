@@ -9,12 +9,28 @@ public class EnemyControls : MonoBehaviour {
 	public laserColour laserColor;
 	public Vector3 lazorOffset;
 	public GameObject lazor;
+	public GameObject exploder;
 
 	void Start()
 	{
 
-		InvokeRepeating("fireazor", 0, lazorCD);
+		InvokeRepeating("fireLazor", 0, lazorCD);
 		heroShip = ((GameObject)GameObject.Find ("Done_Player")).transform;
+	}
+
+	void OnTriggerEnter(Collider collider)
+	{
+		print("BAM! i'm :" + name);
+		Damager damager;
+		if((damager = collider.gameObject.GetComponent<Damager>()) != null)
+		{
+			print("Owch " + damager.Damage);
+			
+			GameObject exploder2 = (GameObject) Instantiate(exploder);
+			exploder2.transform.parent = transform;
+			exploder2.transform.localPosition = Vector3.zero;
+			
+		}
 	}
 
 	void Update(){
@@ -29,7 +45,7 @@ public class EnemyControls : MonoBehaviour {
 	
 	public void fireLazor()
 	{
-		if (Vector3.Distance(transform.position, heroShip.transform.position) < maxDist ) {
+		if (heroShip!= null && Vector3.Distance(transform.position, heroShip.transform.position) < maxDist ) {
 
 			GameObject lazor2 = (GameObject)Instantiate (lazor);
 			

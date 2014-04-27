@@ -31,6 +31,10 @@ public class SparkleExplode : MonoBehaviour {
 		{
 			emitter.emit = false;
 			gameObject.transform.parent.renderer.enabled = false;
+			foreach(Transform trans in gameObject.transform.parent.transform){
+				if(trans != transform)
+					trans.gameObject.SetActive(false);
+			}
 		}
 		if(t == 1)
 		{

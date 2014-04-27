@@ -9,12 +9,13 @@ public class Ship : MonoBehaviour
 	public float lazorCD;
 	float lastFired;
 	public Vector3 lazorOffset;
+	bool dead;
 
 	void OnTriggerEnter(Collider collider)
 	{
 		print("BAM! i'm :" + name);
 		Damager damager;
-		if((damager = collider.gameObject.GetComponent<Damager>()) != null)
+		if(!dead && (damager = collider.gameObject.GetComponent<Damager>()) != null)
 		{
 			print("Owch " + damager.Damage);
 
@@ -22,6 +23,7 @@ public class Ship : MonoBehaviour
 			exploder2.transform.parent = transform;
 			exploder2.transform.localPosition = Vector3.zero;
 
+			dead = true;
 		}
 	}
 
