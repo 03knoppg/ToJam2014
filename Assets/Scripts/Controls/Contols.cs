@@ -1,10 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum laserColour{
+	red,
+	green,
+	blue,
+	yellow
+}
+
 public class Contols : MonoBehaviour {
 
-	Vector3 velocity;	//velocity of spaceship
-	float speed;
+	Vector3 velocity;		//velocity of spaceship
+	public float speed; 	//speed factor
+	public delegate void LaserAction( laserColour colour );
+	public static event LaserAction OnPressed;
+	public int width;		//max x movement
+	public int height;		//max y movement
 
 
 	// Init space ship position and velocity
@@ -12,6 +23,8 @@ public class Contols : MonoBehaviour {
 		transform.localPosition = new Vector3 (0, 0, 0);
 		velocity = new Vector3 ( 0, 0, 0);
 		speed = 0.01f;
+		int width = 640;
+		int height = 480;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +32,7 @@ public class Contols : MonoBehaviour {
 
 		updateSpeed ();
 		updateRotation ();
-
+		laserButton ();
 
 	}
 
@@ -61,7 +74,6 @@ public class Contols : MonoBehaviour {
 		}
 		
 		//update object speed
-		//print (transform.position);
 		transform.localPosition = transform.localPosition + velocity;
 	}
 
@@ -74,5 +86,24 @@ public class Contols : MonoBehaviour {
 		float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
 		Quaternion target = Quaternion.Euler(-tiltAroundX, 0, -tiltAroundZ);
 		transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smooth);
+	}
+
+	void laserButton(){
+
+		if (Input.GetKey ("i") && OnPressed != null){
+			OnPressed( laserColour.red );
+		}
+		
+		if (Input.GetKey ("l") && OnPressed != null){
+			OnPressed( laserColour.green );
+		}
+		
+		if (Input.GetKey ("k") && OnPressed != null){
+			OnPressed( laserColour.blue );
+		}
+		
+		if (Input.GetKey ("j") && OnPressed != null){
+			OnPressed( laserColour.yellow );
+		}
 	}
 }
