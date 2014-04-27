@@ -23,8 +23,8 @@ public class Contols : MonoBehaviour {
 		transform.localPosition = new Vector3 (0, 0, 0);
 		velocity = new Vector3 ( 0, 0, 0);
 		speed = 0.01f;
-		int width = 640;
-		int height = 480;
+		width = 640;
+		height = 480;
 	}
 	
 	// Update is called once per frame
