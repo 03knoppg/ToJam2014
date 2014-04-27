@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SparkleExplode : MonoBehaviour {
 
+
+
 	ParticleEmitter emitter;
 
 	//seconds
@@ -21,8 +23,8 @@ public class SparkleExplode : MonoBehaviour {
 	void Update () {
 		t = Mathf.Clamp01(t + Time.deltaTime / duration);
 		
-		emitter.minEmission = Mathf.Lerp(20, 100, t);
-		emitter.maxEmission = Mathf.Lerp(20, 100, t);
+		emitter.minEmission = Mathf.Lerp(20, 100, t * 2);
+		emitter.maxEmission = Mathf.Lerp(20, 100, t * 2);
 
 		//time to die
 		if(t >= 0.3f)
