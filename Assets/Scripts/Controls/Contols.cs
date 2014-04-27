@@ -100,7 +100,7 @@ public class Contols : MonoBehaviour {
 		float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
 
 		//move object based on movements
-		Quaternion target = Quaternion.Euler(-tiltAroundX, -tiltAroundZ+2, -tiltAroundZ);
+		Quaternion target = Quaternion.Euler(-tiltAroundX, tiltAroundZ, -tiltAroundZ);
 		transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smooth);
 	}
 
