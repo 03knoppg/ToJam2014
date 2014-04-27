@@ -14,17 +14,17 @@ public class Contols : MonoBehaviour {
 	public float speed; 	//speed factor
 	public delegate void LaserAction( laserColour colour );
 	public static event LaserAction OnPressed;
-	public int width;		//max x movement
-	public int height;		//max y movement
+	public float width;		//max x movement
+	public float height;		//max y movement
 
 
 	// Init space ship position and velocity
 	void Start () {
 		transform.localPosition = new Vector3 (0, 0, 0);
 		velocity = new Vector3 ( 0, 0, 0);
-		speed = 0.01f;
-		width = 640;
-		height = 480;
+		speed = 0.025f;
+		width = 2;
+		height = 2;
 	}
 	
 	// Update is called once per frame
@@ -47,38 +47,51 @@ public class Contols : MonoBehaviour {
 		if (velocity.sqrMagnitude < new Vector3(0.01f, 0.01f, 0.01f).sqrMagnitude)
 			velocity = new Vector3 (0, 0, 0);
 		
-		
-		//handle button presses
+		//handle direction button presses
 		if (Input.GetKey ("w")) {
-			print("w pressed");
-			y = speed;
-			velocity = new Vector3( x, y, z );
+			//print("w pressed");
+			if (transform.localPosition.y < height){
+				y = speed;
+				velocity = new Vector3( x, y, z );
+			}
 		} 
 		
 		if (Input.GetKey ("s")) {
-			print ("s pressed");
-			y = -speed;
-			velocity = new Vector3( x, y, z );
+			//print ("s pressed");
+			if (transform.localPosition.y > -height){
+				y = -speed;
+				velocity = new Vector3( x, y, z );
+			}
 		}
 		
 		if (Input.GetKey ("a")) {
-			print ("a pressed");
-			x = -speed;
-			velocity = new Vector3( x, y, z );
+			//print ("a pressed");
+			if (transform.localPosition.x > -width){
+				x = -speed;
+				velocity = new Vector3( x, y, z );
+			}
 		}
 		
 		if (Input.GetKey ("d")) {
-			print("d pressed");
-			x = speed;
-			velocity = new Vector3( x, y, z );
+			//print("d pressed");
+			if (transform.localPosition.x < width){
+				x = speed;
+				velocity = new Vector3( x, y, z );
+			}
 		}
+
+		//stops if close to boarder
+		//if (transform.localPosition.x > width || transform.localPosition.x < -width || transform.localPosition.y > height || transform.localPosition.y < - height ) {
+		//	velocity = new Vector3 (0, 0, 0);
+		//}
 		
 		//update object speed
 		transform.localPosition = transform.localPosition + velocity;
+		print (transform.localPosition);
 	}
 
 	void updateRotation(){
-
+		//make ship point in movement direction
 		float smooth = 2.0F;
 		float tiltAngle = 30.0F;
 		
@@ -89,7 +102,7 @@ public class Contols : MonoBehaviour {
 	}
 
 	void laserButton(){
-
+		//handle weapon key presses. passes msg to Graham's laser functions
 		if (Input.GetKey ("i") && OnPressed != null){
 			OnPressed( laserColour.red );
 		}
