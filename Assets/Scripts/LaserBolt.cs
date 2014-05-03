@@ -6,6 +6,8 @@ public class LaserBolt : Damager {
 	public float speed = 5;
 	float life = 5;
 	float time;
+	public GameObject source;
+
 	//public float Damage{ get { return damage; } set { damage = value; } }
 	void Start(){
 		time = Time.time;
@@ -21,7 +23,9 @@ public class LaserBolt : Damager {
 
 	void OnTriggerEnter(Collider collider)
 	{
-		print("BAM! i'm :" + name);
+		if(collider.gameObject == source)
+			return;
+		//print("BAM! i'm :" + name);
 		Destroy(gameObject);
 	}
 }

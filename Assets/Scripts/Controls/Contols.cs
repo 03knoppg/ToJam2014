@@ -12,7 +12,7 @@ public class Contols : MonoBehaviour {
 
 	Vector3 velocity;		//velocity of spaceship
 	public float speed; 	//speed factor
-	public delegate void LaserAction( laserColour colour );
+	public delegate void LaserAction();
 	public static event LaserAction OnPressed;
 	public float width;		//max x movement
 	public float height;		//max y movement
@@ -87,7 +87,7 @@ public class Contols : MonoBehaviour {
 		
 		//update object speed
 		transform.localPosition = transform.localPosition + velocity;
-		print (transform.localPosition);
+		//print (transform.localPosition);
 	}
 
 	void updateRotation(){
@@ -107,19 +107,8 @@ public class Contols : MonoBehaviour {
 	void laserButton(){
 		//handle weapon key presses. passes msg to Graham's laser functions
 		if (Input.GetKey ("i") && OnPressed != null){
-			OnPressed( laserColour.red );
+			OnPressed(  );
 		}
-		
-		if (Input.GetKey ("l") && OnPressed != null){
-			OnPressed( laserColour.green );
-		}
-		
-		if (Input.GetKey ("k") && OnPressed != null){
-			OnPressed( laserColour.blue );
-		}
-		
-		if (Input.GetKey ("j") && OnPressed != null){
-			OnPressed( laserColour.yellow );
-		}
+
 	}
 }

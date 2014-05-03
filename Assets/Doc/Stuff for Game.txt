@@ -1,0 +1,3 @@
+Mob latches on and starts following a pattern (that can be offset by whatever distance it is when you approach).
+Mob latches on and starts following a pattern (and it corrects to get onto the path properly).
+Points at which mobs will spawn and fly in on a path.
